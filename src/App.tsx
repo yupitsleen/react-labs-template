@@ -2,6 +2,7 @@ import React from 'react'
 import logo from './logo.svg'
 import './App.css'
 import { MainLayout } from './layout'
+import { Timer } from './labs/timer'
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>React Labs</p>
+          <Timer></Timer>
         </header>
       </div>
     </MainLayout>
