@@ -1,4 +1,4 @@
-import { Box, Button, styled, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 
 import React from 'react'
 import { useTimer } from '.'
@@ -29,6 +29,7 @@ const TimerLogo: React.VFC = () => {
 }
 
 export const Timer: React.VFC<TimerProps> = (props) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { displayFormat = 'hh:mm:ss' } = props
   const { time, isActive, start, pause, reset } = useTimer()
 
