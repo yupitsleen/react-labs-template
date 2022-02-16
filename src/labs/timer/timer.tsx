@@ -1,22 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
-
-/*****SET UP*****/
 interface Time {
   seconds: number
   minutes: number
   hours: number
 }
-interface UseTimer {
-  time: Time
-  isTicking: boolean
-  pause: () => void
-  start: () => void
-  reset: () => void
-}
 
 /*****HOOK: INCREMENT******/
 function useInterval(callback: () => void, delay = 1000) {
   const savedCallBack = useRef(callback)
+
   //remember latest callback when it changes
   useEffect(() => {
     savedCallBack.current = callback
@@ -32,13 +24,21 @@ function useInterval(callback: () => void, delay = 1000) {
   }, [delay])
 }
 
+/*****HOOK: SETS THE TIME ******/
+
 const initialTime: Time = {
   seconds: 0,
   minutes: 0,
   hours: 0,
 }
+interface UseTimer {
+  time: Time
+  isTicking: boolean
+  pause: () => void
+  start: () => void
+  reset: () => void
+}
 
-/*****HOOK: SETS THE TIME ******/
 const useTimer = (): UseTimer => {
   const [time, setTime] = useState<Time>(initialTime)
   const [ticks, setTicks] = useState(0)
