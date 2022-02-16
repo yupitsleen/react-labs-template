@@ -12,17 +12,22 @@ const TimeDisplay = styled('div')({
 })
 
 export const Timer: React.FC<TimerProps> = (props) => {
-  const { displayFormat = 'hh:mm:ss', children } = props
   const { time, start, pause, reset } = useTimer()
   
   const formatTime = (time: Time) => {
-    // TODO: Use display format to return formatted time
     return `${time.hours.toString().padStart(2, '0')}:${time.minutes.toString().padStart(2, '0')}:${time.seconds.toString().padStart(2, '0')}`
   }
 
   return (
     <>
-      <TimeDisplay>{formatTime(time)}</TimeDisplay>
+      <TimeDisplay>
+        <h1>Timer</h1>
+        {formatTime(time)}
+        <br/>
+        <button onClick={() => start()}>Start</button>
+        <button onClick={() => pause()}>Pause</button>
+        <button onClick={() => reset()}>Reset</button>
+      </TimeDisplay>
     </>
   )
 } 

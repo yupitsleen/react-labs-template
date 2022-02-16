@@ -6,6 +6,7 @@ export interface Time {
 
 export interface UseTimer {
   time: Time
+  isTicking: boolean
   pause: () => void
   start: () => void
   reset: () => void
