@@ -14,17 +14,8 @@ interface UseTimer {
   reset: () => void
 }
 
-type TimerProps = {
-  displayFormat?: string
-}
-
-const initialTime: Time = {
-  seconds: 0,
-  minutes: 0,
-  hours: 0,
-}
-
-function increment(callback: () => void, delay = 1000) {
+/*****HOOK: INCREMENT******/
+function useInterval(callback: () => void, delay = 1000) {
   const savedCallBack = useRef(callback)
   //remember latest callback when it changes
   useEffect(() => {
@@ -41,6 +32,12 @@ function increment(callback: () => void, delay = 1000) {
   }, [delay])
 }
 
+const initialTime: Time = {
+  seconds: 0,
+  minutes: 0,
+  hours: 0,
+}
+
 /*****HOOK: SETS THE TIME ******/
 const useTimer = (): UseTimer => {
   const [time, setTime] = useState<Time>(initialTime)
@@ -48,7 +45,7 @@ const useTimer = (): UseTimer => {
   const [isTicking, setTicking] = useState(false)
 
   /* Increment Functionality */
-  increment(() => {
+  useInterval(() => {
     if (isTicking) {
       setTicks(ticks + 1)
       console.log(ticks)
@@ -90,8 +87,8 @@ const useTimer = (): UseTimer => {
   }
 }
 
-/* VIEW */
-export const Timer: React.FC<TimerProps> = () => {
+/* TIMER COMPONENT */
+export const Timer: React.VFC = () => {
   const { time, isTicking, start, pause, reset } = useTimer()
 
   const formatTime = (time: Time) => {
