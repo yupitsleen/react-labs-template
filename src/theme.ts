@@ -1,7 +1,6 @@
 import { createTheme } from '@mui/material/styles'
 import { red } from '@mui/material/colors'
 
-// Add additional values to theme and options here
 declare module '@mui/material/styles' {
   interface Theme {
     status: {
