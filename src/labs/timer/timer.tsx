@@ -48,7 +48,7 @@ const useTimer = (): UseTimer => {
   useInterval(() => {
     if (isTicking) {
       setTicks(ticks + 1)
-      console.log(ticks)
+      //console.log(ticks)
     }
   })
 
@@ -65,6 +65,7 @@ const useTimer = (): UseTimer => {
   }, [ticks])
 
   /*Defining Each Button's Functionality */
+  //these should all have callBacks
   const start = () => {
     if (!isTicking) {
       setTicking(true)
