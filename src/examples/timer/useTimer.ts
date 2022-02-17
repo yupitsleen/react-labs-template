@@ -17,16 +17,15 @@ export const useTimer = (): UseTimer => {
   useInterval(() => {
     if (isActive) {
       setTicks((current) => current + 1)
-      // console.log('tick: ', ticks + 1)
     }
   })
 
   useEffect(() => {
     const hours = ~~(ticks / 3600)
     const minutes = ~~((ticks % 3600) / 60)
-    const sec = ~~ticks % 60
+    const seconds = ~~ticks % 60
 
-    setTime({ hours, minutes, seconds: sec })
+    setTime({ hours, minutes, seconds })
   }, [ticks])
 
   const pause = () => {
