@@ -2,15 +2,13 @@ import React, {
   useReducer,
   useContext,
   createContext,
-  useCallback,
-  useState,
   ReactNode,
   Reducer,
 } from 'react'
 import { GameBoard, GameRow, GameTile } from './components'
 
 type AttemptProps = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 type WordleGameState = {
@@ -54,7 +52,7 @@ export const initialGameState: WordleGameState = {
   },
 }
 
-const WordleContext = React.createContext<WordleGameState>(initialGameState)
+const WordleContext = createContext<WordleGameState>(initialGameState)
 
 type Dispatch = (action: Action) => void
 
@@ -88,4 +86,10 @@ export const WordleContextProvider = ({ children }: AttemptProps) => {
   )
 }
 
-const useWordle = () => useContext(WordleContext)
+export const useWordleContextState = () => {
+  return useContext(WordleContext)
+}
+
+export const useWordleDispatchState = () => {
+  return useContext(WordleDispatchContext)
+}
