@@ -3,7 +3,7 @@ import { Box, SxProps } from '@mui/system'
 import { SquareStatus } from '../wordle'
 
 type Props = {
-  word?: string
+  letter?: string
   state?: SquareStatus
 }
 
@@ -30,7 +30,7 @@ const tileStateOverrides: StyleStateMap = {
 }
 
 export const GameTile: React.VFC<Props> = (props) => {
-  const { word, state = word?.length ? 'notInWord' : 'blank' } = props
+  const { letter, state = letter?.length ? 'notInWord' : 'blank' } = props
   const styleOverrides: SxProps = tileStateOverrides[state] ?? {}
   return (
     <Box
@@ -48,7 +48,7 @@ export const GameTile: React.VFC<Props> = (props) => {
         ...styleOverrides,
       }}
     >
-      {word}
+      {letter}
     </Box>
   )
 }
