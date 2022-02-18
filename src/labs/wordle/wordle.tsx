@@ -5,6 +5,7 @@ import React, {
   useCallback,
   useState,
   ReactNode,
+  Reducer,
 } from 'react'
 import { GameBoard, GameRow, GameTile } from './components'
 
@@ -23,7 +24,6 @@ type Action =
   | {
       type: 'ATTEMPT_WORD'
       gameState: WordleGameState
-      attempt: AttemptState
     }
   | { type: 'RESET_GAME'; gameState: WordleGameState }
 
@@ -62,15 +62,15 @@ const WordleDispatchContext = React.createContext<Dispatch | undefined>(
   undefined
 )
 
-export const gameReducer = (
-  state: WordleGameState = initialGameState,
+export const gameReducer: Reducer<WordleGameState, Action> = (
+  state: WordleGameState,
   action: Action
 ) => {
   switch (action.type) {
     case 'START_GAME':
       return { ...state, gameState: action.gameState }
     case 'ATTEMPT_WORD':
-      return { ...state, gameState: action.gameState, attempt: action.attempt }
+      return { ...state, gameState: action.gameState }
     case 'RESET_GAME':
       return { ...state, gameState: action.gameState }
   }
