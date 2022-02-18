@@ -1,5 +1,5 @@
-import { Box, Typography } from "@mui/material"
-import React from "react"
+import { Box, Typography } from '@mui/material'
+import React from 'react'
 import { GameBoard, GameTile, GameRow } from '../../labs/wordle/components'
 
 export type Props = {
@@ -9,7 +9,7 @@ export type Props = {
 interface Guess {
   word: string[]
 }
-
+/*
 export const WordleLab: React.VFC<Props> = () => {
   return (
     <GameBoard>
@@ -51,3 +51,4 @@ export const WordleLab: React.VFC<Props> = () => {
     </GameBoard>
   )
 }
+*/

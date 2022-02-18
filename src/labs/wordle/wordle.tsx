@@ -33,7 +33,8 @@ type AttemptState = {
   isSubmitted: boolean
 }
 
-type SquareStatus = 'correct' | 'in word' | 'notInWord' | 'blank' | 'attempt'
+export type SquareStatus = 'correct' | 'inWord' | 'notInWord' | 'blank'
+
 type WordStatus = [
   SquareStatus,
   SquareStatus,
@@ -92,4 +93,46 @@ export const useWordleContextState = () => {
 
 export const useWordleDispatchState = () => {
   return useContext(WordleDispatchContext)
+}
+
+export const WordleLab: React.VFC<AttemptProps> = () => {
+  return (
+    <GameBoard>
+      <GameRow>
+        <GameTile word="r" />
+        <GameTile word="e" state="correct" />
+        <GameTile word="a" state="notInWord" />
+        <GameTile word="c" state="inWord" />
+        <GameTile word="t" />
+      </GameRow>
+      <GameRow>
+        <GameTile />
+        <GameTile />
+        <GameTile />
+        <GameTile />
+        <GameTile />
+      </GameRow>
+      <GameRow>
+        <GameTile />
+        <GameTile />
+        <GameTile />
+        <GameTile />
+        <GameTile />
+      </GameRow>
+      <GameRow>
+        <GameTile />
+        <GameTile />
+        <GameTile />
+        <GameTile />
+        <GameTile />
+      </GameRow>
+      <GameRow>
+        <GameTile />
+        <GameTile />
+        <GameTile />
+        <GameTile />
+        <GameTile />
+      </GameRow>
+    </GameBoard>
+  )
 }

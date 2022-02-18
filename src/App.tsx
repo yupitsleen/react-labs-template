@@ -6,6 +6,7 @@ import {
   WordleContextProvider,
   initialGameState,
   gameReducer,
+  WordleLab,
 } from './labs/wordle'
 
 function App() {
@@ -13,7 +14,10 @@ function App() {
     <MainLayout showToolbar={false}>
       <div className="App">
         <header className="App-header">
-          <WordleContextProvider>Wordle</WordleContextProvider>
+          Wordle
+          <WordleLab>
+            <WordleContextProvider>Wordle</WordleContextProvider>
+          </WordleLab>
         </header>
       </div>
     </MainLayout>

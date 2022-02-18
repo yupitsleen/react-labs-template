@@ -1,37 +1,36 @@
 import React from 'react'
 import { Box, SxProps } from '@mui/system'
-
-export type TileState = 'empty' | 'match' | 'miss' | 'present'
+import { SquareStatus } from '../wordle'
 
 type Props = {
-  letter?: string
-  state?: TileState
+  word?: string
+  state?: SquareStatus
 }
 
 type StyleStateMap = {
-  [state in TileState]: SxProps
+  [state in SquareStatus]: SxProps
 }
 
 const tileStateOverrides: StyleStateMap = {
-  match: {
+  correct: {
     borderColor: 'success.main',
     backgroundColor: 'success.main',
   },
-  miss: {
+  notInWord: {
     borderColor: 'grey.700',
     backgroundColor: 'grey.700',
   },
-  empty: {
+  blank: {
     borderColor: 'grey.700',
   },
-  present: {
+  inWord: {
     borderColor: '#c9b458',
     backgroundColor: '#c9b458',
   },
 }
 
 export const GameTile: React.VFC<Props> = (props) => {
-  const { letter, state = letter?.length ? 'miss' : 'empty' } = props
+  const { word, state = word?.length ? 'notInWord' : 'blank' } = props
   const styleOverrides: SxProps = tileStateOverrides[state] ?? {}
   return (
     <Box
@@ -49,7 +48,7 @@ export const GameTile: React.VFC<Props> = (props) => {
         ...styleOverrides,
       }}
     >
-      {letter}
+      {word}
     </Box>
   )
 }
