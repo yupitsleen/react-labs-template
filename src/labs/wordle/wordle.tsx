@@ -6,6 +6,7 @@ import React, {
   Reducer,
 } from 'react'
 import { GameBoard, GameRow, GameTile } from './components'
+import { useQuery } from 'react-query'
 
 type AttemptProps = {
   children: ReactNode
