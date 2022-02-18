@@ -44,7 +44,7 @@ type WordStatus = [
   SquareStatus
 ]
 
-const initialGameState: WordleGameState = {
+export const initialGameState: WordleGameState = {
   randomWord: '',
   gameStatus: 'start',
   attemptState: {
@@ -62,7 +62,10 @@ const WordleDispatchContext = React.createContext<Dispatch | undefined>(
   undefined
 )
 
-const gameReducer = (state: WordleGameState, action: Action) => {
+export const gameReducer = (
+  state: WordleGameState = initialGameState,
+  action: Action
+) => {
   switch (action.type) {
     case 'START_GAME':
       return { ...state, gameState: action.gameState }
@@ -74,7 +77,7 @@ const gameReducer = (state: WordleGameState, action: Action) => {
 }
 
 export const WordleContextProvider = ({ children }: AttemptProps) => {
-  const [gameState, dispatch] = useReducer(gameReducer)
+  const [gameState, dispatch] = useReducer(gameReducer, initialGameState)
 
   return (
     <WordleContext.Provider value={gameState}>

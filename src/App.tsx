@@ -2,7 +2,11 @@ import React from 'react'
 import './App.css'
 import { MainLayout } from './layout'
 import { Timer } from './labs/timer'
-import { WordleContextProvider } from './labs/wordle'
+import {
+  WordleContextProvider,
+  initialGameState,
+  gameReducer,
+} from './labs/wordle'
 
 function App() {
   return (
