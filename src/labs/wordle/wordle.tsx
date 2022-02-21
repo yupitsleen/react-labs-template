@@ -4,11 +4,13 @@ import React, {
   createContext,
   ReactNode,
   Reducer,
+  useEffect,
 } from 'react'
 import { GameBoard, GameRow, GameTile } from './components'
 import { useQuery } from 'react-query'
+import words from './words.json'
 
-type AttemptProps = {
+export type AttemptProps = {
   children: ReactNode
 }
 
@@ -25,7 +27,7 @@ type Action =
 
 type GameStatus = 'win' | 'lose' | 'start' | 'playing'
 
-type AttemptState = {
+export type AttemptState = {
   attemptedWord: string
   attemptedWordStatus: [
     AttemptedLetter,
@@ -38,7 +40,7 @@ type AttemptState = {
 
 export type SquareStatus = 'correct' | 'inWord' | 'notInWord' | 'blank'
 
-type AttemptedLetter = {
+export type AttemptedLetter = {
   letter: string
   state: SquareStatus
 }
@@ -49,15 +51,13 @@ export const initialGameState: WordleGameState = {
   attempts: [],
 }
 
-const WordleContext = createContext<WordleGameState>(initialGameState)
+const GameStateContext = createContext<WordleGameState>(initialGameState)
 
 type Dispatch = (action: Action) => void
 
-const WordleDispatchContext = React.createContext<Dispatch | undefined>(
-  undefined
-)
+const GameDispatchContext = React.createContext<Dispatch | undefined>(undefined)
 
-export const gameReducer: Reducer<WordleGameState, Action> = (
+export const wordleGameReducer: Reducer<WordleGameState, Action> = (
   state: WordleGameState,
   action: Action
 ) => {
@@ -71,63 +71,42 @@ export const gameReducer: Reducer<WordleGameState, Action> = (
   }
 }
 
-export const WordleContextProvider = ({ children }: AttemptProps) => {
-  const [gameState, dispatch] = useReducer(gameReducer, initialGameState)
+export const WordleGameProvider = ({ children }: AttemptProps) => {
+  const [gameState, dispatch] = useReducer(wordleGameReducer, initialGameState)
 
   return (
-    <WordleContext.Provider value={gameState}>
-      <WordleDispatchContext.Provider value={dispatch}>
+    <GameStateContext.Provider value={gameState}>
+      <GameDispatchContext.Provider value={dispatch}>
         {children}
-      </WordleDispatchContext.Provider>
-    </WordleContext.Provider>
+      </GameDispatchContext.Provider>
+    </GameStateContext.Provider>
   )
 }
 
-export const useWordleContextState = () => {
-  return useContext(WordleContext)
+export const useWordleState = () => {
+  return useContext(GameStateContext)
 }
 
-export const useWordleDispatchState = () => {
-  return useContext(WordleDispatchContext)
+export const useWordleDispatch = () => {
+  return useContext(GameDispatchContext)
 }
+
+const wordList = words
+const randomWord = wordList[1]
+const row = [1, 2, 3, 4, 5]
 
 export const WordleLab: React.VFC<AttemptProps> = () => {
+  const attempts = useWordleState().attempts
+  const dispatch = useWordleDispatch
+
   return (
     <GameBoard>
       <GameRow>
         <GameTile />
         <GameTile />
-        <GameTile letter="string" state={} />
-        <GameTile letter="c" state="inWord" />
+        <GameTile letter="r" state="inWord" />
+        <GameTile letter="c" state="notInWord" />
         <GameTile letter="t" />
-      </GameRow>
-      <GameRow>
-        <GameTile />
-        <GameTile />
-        <GameTile />
-        <GameTile />
-        <GameTile />
-      </GameRow>
-      <GameRow>
-        <GameTile />
-        <GameTile />
-        <GameTile />
-        <GameTile />
-        <GameTile />
-      </GameRow>
-      <GameRow>
-        <GameTile />
-        <GameTile />
-        <GameTile />
-        <GameTile />
-        <GameTile />
-      </GameRow>
-      <GameRow>
-        <GameTile />
-        <GameTile />
-        <GameTile />
-        <GameTile />
-        <GameTile />
       </GameRow>
     </GameBoard>
   )

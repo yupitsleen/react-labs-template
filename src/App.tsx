@@ -3,9 +3,9 @@ import './App.css'
 import { MainLayout } from './layout'
 import { Timer } from './labs/timer'
 import {
-  WordleContextProvider,
+  WordleGameProvider,
   initialGameState,
-  gameReducer,
+  wordleGameReducer,
   WordleLab,
 } from './labs/wordle'
 
@@ -16,7 +16,7 @@ function App() {
         <header className="App-header">
           Wordle
           <WordleLab>
-            <WordleContextProvider>Wordle</WordleContextProvider>
+            <WordleGameProvider>Wordle</WordleGameProvider>
           </WordleLab>
         </header>
       </div>
